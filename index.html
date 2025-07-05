@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Планшет игрока — Курортная жизнь</title>
@@ -66,38 +67,6 @@
       font-size: 16px;
       border-bottom: 1px solid #ccc;
     }
-    .row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .box {
-      flex: 1 1 45%;
-      border: 1px solid #ddd;
-      padding: 10px;
-      min-height: 60px;
-      border-radius: 8px;
-      background: #f5f5f5;
-      position: relative;
-    }
-    .box textarea {
-      width: 100%;
-      height: 40px;
-      resize: none;
-      border: none;
-      background: transparent;
-      font-family: inherit;
-    }
-    .notes {
-      width: 100%;
-      margin-top: 30px;
-    }
-    .notes h2 {
-      margin-bottom: 10px;
-    }
-    .notes ul {
-      padding-left: 20px;
-    }
     .card {
       background: #eef;
       border: 1px solid #99c;
@@ -108,93 +77,195 @@
     .card h4 {
       margin: 0 0 5px;
     }
+    .generate-btn {
+      margin: 10px 0;
+      padding: 8px 12px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+    }
   </style>
 </head>
 <body>
+
   <div class="section island">
     <h2>🌴 Остров игрока</h2>
-    <div class="grid" id="island-grid"></div><div class="track">
-  <label for="money">💵 Деньги <span id="money-val">10</span></label>
-  <input id="money" type="range" min="0" max="20" value="10" oninput="document.getElementById('money-val').textContent = this.value">
-</div>
-<div class="track">
-  <label for="joy">🙂 Радость <span id="joy-val">5</span></label>
-  <input id="joy" type="range" min="0" max="10" value="5" oninput="document.getElementById('joy-val').textContent = this.value">
-</div>
-<div class="track">
-  <label for="rep">⭐ Репутация <span id="rep-val">2</span></label>
-  <input id="rep" type="range" min="0" max="5" value="2" oninput="document.getElementById('rep-val').textContent = this.value">
-</div>
+    <div class="grid" id="island-grid"></div>
 
-  </div>  <div class="section control-panel">
-    <h2>🏗️ Курорт & Персонал</h2>
+    <div class="track">
+      <label for="money">💵 Деньги <span id="money-val">10</span></label>
+      <input id="money" type="range" min="0" max="20" value="10" oninput="document.getElementById('money-val').textContent = this.value">
+    </div>
+    <div class="track">
+      <label for="joy">🙂 Радость <span id="joy-val">5</span></label>
+      <input id="joy" type="range" min="0" max="10" value="5" oninput="document.getElementById('joy-val').textContent = this.value">
+    </div>
+    <div class="track">
+      <label for="rep">⭐ Репутация <span id="rep-val">2</span></label>
+      <input id="rep" type="range" min="0" max="5" value="2" oninput="document.getElementById('rep-val').textContent = this.value">
+    </div>
+  </div>
+
+  <div class="section control-panel">
+    <h2>🏗️ Панель управления</h2>
+
     <div class="zone">
       <h3>Здания</h3>
-      <div class="row">
-        <div class="box"><textarea placeholder="Базовое здание"></textarea></div>
-        <div class="box"><textarea placeholder="Продвинутое здание"></textarea></div>
-      </div>
+      <button class="generate-btn" onclick="generateBuildings()">🎲 Новые здания</button>
+      <div id="building-cards"></div>
     </div>
+
     <div class="zone">
-      <h3>Рабочие</h3>
-      <div class="row">
-        <div class="box"><textarea placeholder="👩‍🍳 Повар (ур. 1–3)"></textarea></div>
-        <div class="box"><textarea placeholder="🧼 Уборщик"></textarea></div>
-      </div>
+      <h3>Карты условий</h3>
+      <button class="generate-btn" onclick="generateConditions()">🃏 Новые условия</button>
+      <div id="condition-cards"></div>
     </div>
+
     <div class="zone">
       <h3>Отзывы</h3>
-      <div class="row">
-        <div class="box"><textarea placeholder="Отзыв 1"></textarea></div>
-        <div class="box"><textarea placeholder="Отзыв 2"></textarea></div>
-      </div>
+      <button class="generate-btn" onclick="generateFeedbacks()">📢 Новые отзывы</button>
+      <div id="feedback-cards"></div>
     </div>
+
     <div class="zone">
-      <h3>Цели / Сценарии</h3>
-      <div class="row">
-        <div class="box"><textarea placeholder="🎯 Цель 1"></textarea></div>
-        <div class="box"><textarea placeholder="🎯 Цель 2"></textarea></div>
-      </div>
+      <h3>Сценарии и цели</h3>
+      <button class="generate-btn" onclick="generateScenarios()">📜 Новый сценарий</button>
+      <div id="scenario-cards"></div>
     </div>
-  </div>  <div class="notes">
-    <h2>🔍 Примеры стартовых карт</h2>
-    <div class="card">
-      <h4>«Пляж мечты»</h4>
-      <p>3 пляжа, 1 пирс. Бонус: +1 радость. Нельзя строить кафе до 2 раунда.</p>
+
+    <div class="zone">
+      <h3>Персонал</h3>
+      <button class="generate-btn" onclick="generateWorkers()">👨‍🔧 Нанять персонал</button>
+      <div id="worker-cards"></div>
     </div>
-    <div class="card">
-      <h4>«Лесная бухта»</h4>
-      <p>2 леса, 1 лагерь. Бонус: +1 монета. Репутация начинается с 0.</p>
-    </div><h2>🎴 Карточки условий раунда</h2>
-<div class="card">
-  <h4>Условие: Построй между пляжем и лесом</h4>
-  <p>Бонус: +1 радость</p>
-</div>
-<div class="card">
-  <h4>Условие: Кафе рядом с пирсом</h4>
-  <p>Бонус: +1 монета</p>
-</div>
+  </div>
 
-<h2>🔄 Каскадные бонусы</h2>
-<ul>
-  <li>2 душа на пляже → +1 радость</li>
-  <li>3 спорт-зоны → +2 монеты</li>
-  <li>2+ спасателя → +1 отзыв</li>
-</ul>
+<script>
+  const grid = document.getElementById("island-grid");
+  for (let i = 0; i < 121; i++) {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+    cell.onclick = () => cell.classList.toggle("selected");
+    grid.appendChild(cell);
+  }
 
-<h2>📢 Связь отзывов и зданий</h2>
-<ul>
-  <li>3 отзыва с темой «еда» → Повар +1 уровень</li>
-  <li>Отзыв «туалеты грязные» + улучшение → +1 радость</li>
-</ul>
+  const buildings = [
+    { base: "Кафе", upgrade: "Ресторан" },
+    { base: "Душ", upgrade: "СПА-зона" },
+    { base: "Туалет", upgrade: "Туалет VIP" },
+    { base: "Пляж", upgrade: "Пляж с лежаками" },
+    { base: "Бар", upgrade: "Коктейль-бар у воды" }
+  ];
 
-  </div>  <script>
-    const grid = document.getElementById("island-grid");
-    for (let i = 0; i < 121; i++) {
-      const cell = document.createElement("div");
-      cell.className = "cell";
-      cell.onclick = () => cell.classList.toggle("selected");
-      grid.appendChild(cell);
+  const conditions = [
+    "Построй между пляжем и лесом → +1 радость",
+    "Кафе рядом с пирсом → +1 монета",
+    "Душ в скале → открыть 1 отзыв",
+    "Спорт-зона внизу карты → +1 радость",
+    "Отель рядом с аниматором → +1 звезда"
+  ];
+
+  const feedbacks = [
+    "Туалеты грязные — наймите уборщика и получите +1 радость",
+    "Нет развлечений — постройте бар или СПА и получите бонус",
+    "Душевые сломаны — замените на СПА и получите +1 монету",
+    "Нет веган еды — постройте ресторан и получите +1 отзыв"
+  ];
+
+  const scenarios = [
+    "🏝️ Семейный курорт: Достигните 5 радости и 3 отзывов — получите 3 победных звезды",
+    "🎉 Тусовочный курорт: Постройте 2 бара, 2 пляжа и СПА — получите +2 звезды",
+    "⛹️‍♂️ Спортивный лагерь: Постройте спорт-зоны в каждом углу карты",
+    "🌧️ Дождливый сезон: начните с -2 монет, но получите +1 звезду за каждый душ"
+  ];
+
+  const workers = [
+    {
+      name: "Уборщик",
+      levels: [
+        "🧹 Уровень 1: +1 к устранению плохих отзывов",
+        "🧼 Уровень 2: позволяет игнорировать 1 отзыв каждую фазу",
+        "🚿 Уровень 3: +1 радость при каждом устранении"
+      ]
+    },
+    {
+      name: "Аниматор",
+      levels: [
+        "🎤 Уровень 1: +1 радость за СПА/Бар",
+        "🎪 Уровень 2: добавляет бонус к соседним зданиям",
+        "🎆 Уровень 3: каждый отзыв даёт +1 монету"
+      ]
+    },
+    {
+      name: "Повар",
+      levels: [
+        "🥣 Уровень 1: еда +1 радость, если рядом с пляжем",
+        "🍲 Уровень 2: ресторан даёт 2 радости",
+        "🍽️ Уровень 3: каждая постройка еды снижает 1 отзыв"
+      ]
+    },
+    {
+      name: "Инструктор",
+      levels: [
+        "🤸 Уровень 1: +1 к спорту при постройке спортзоны",
+        "🏋️ Уровень 2: спортзона не требует монет",
+        "🏄 Уровень 3: спорт + бар = +1 звезда"
+      ]
     }
-  </script></body>
+  ];
+
+  function randomCard(text) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<p>${text}</p>`;
+    return card;
+  }
+
+  function generateBuildings() {
+    const container = document.getElementById("building-cards");
+    container.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      const pick = buildings[Math.floor(Math.random() * buildings.length)];
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `<h4>${pick.base} / ${pick.upgrade}</h4><p>Выберите одно для постройки.</p>`;
+      container.appendChild(card);
+    }
+  }
+
+  function generateConditions() {
+    const container = document.getElementById("condition-cards");
+    container.innerHTML = "";
+    const shuffled = [...conditions].sort(() => 0.5 - Math.random()).slice(0, 2);
+    shuffled.forEach(text => container.appendChild(randomCard(text)));
+  }
+
+  function generateFeedbacks() {
+    const container = document.getElementById("feedback-cards");
+    container.innerHTML = "";
+    const shuffled = [...feedbacks].sort(() => 0.5 - Math.random()).slice(0, 2);
+    shuffled.forEach(text => container.appendChild(randomCard(text)));
+  }
+
+  function generateScenarios() {
+    const container = document.getElementById("scenario-cards");
+    container.innerHTML = "";
+    const pick = scenarios[Math.floor(Math.random() * scenarios.length)];
+    container.appendChild(randomCard(pick));
+  }
+
+  function generateWorkers() {
+    const container = document.getElementById("worker-cards");
+    container.innerHTML = "";
+    const pick = workers[Math.floor(Math.random() * workers.length)];
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<h4>👷 ${pick.name}</h4><ul>${pick.levels.map(l => `<li>${l}</li>`).join('')}</ul>`;
+    container.appendChild(card);
+  }
+</script>
+</body>
 </html>
