@@ -98,6 +98,16 @@
     .notes ul {
       padding-left: 20px;
     }
+    .card {
+      background: #eef;
+      border: 1px solid #99c;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .card h4 {
+      margin: 0 0 5px;
+    }
   </style>
 </head>
 <body>
@@ -123,44 +133,61 @@
       <div class="row">
         <div class="box"><textarea placeholder="Базовое здание"></textarea></div>
         <div class="box"><textarea placeholder="Продвинутое здание"></textarea></div>
-        <div class="box"><textarea placeholder="Базовое здание"></textarea></div>
-        <div class="box"><textarea placeholder="Продвинутое здание"></textarea></div>
       </div>
-    </div><div class="zone">
-  <h3>Рабочие</h3>
-  <div class="row">
-    <div class="box"><textarea placeholder="👩‍🍳 Повар (ур. 1–3)"></textarea></div>
-    <div class="box"><textarea placeholder="🧼 Уборщик"></textarea></div>
-    <div class="box"><textarea placeholder="🛟 Спасатель"></textarea></div>
-    <div class="box"><textarea placeholder="🎉 Аниматор"></textarea></div>
-  </div>
-</div>
-
-<div class="zone">
-  <h3>Отзывы</h3>
-  <div class="row">
-    <div class="box"><textarea placeholder="Отзыв 1"></textarea></div>
-    <div class="box"><textarea placeholder="Отзыв 2"></textarea></div>
-  </div>
-</div>
-
-<div class="zone">
-  <h3>Цели / Сценарии</h3>
-  <div class="row">
-    <div class="box"><textarea placeholder="🎯 Цель 1"></textarea></div>
-    <div class="box"><textarea placeholder="🎯 Цель 2"></textarea></div>
-  </div>
-</div>
-
+    </div>
+    <div class="zone">
+      <h3>Рабочие</h3>
+      <div class="row">
+        <div class="box"><textarea placeholder="👩‍🍳 Повар (ур. 1–3)"></textarea></div>
+        <div class="box"><textarea placeholder="🧼 Уборщик"></textarea></div>
+      </div>
+    </div>
+    <div class="zone">
+      <h3>Отзывы</h3>
+      <div class="row">
+        <div class="box"><textarea placeholder="Отзыв 1"></textarea></div>
+        <div class="box"><textarea placeholder="Отзыв 2"></textarea></div>
+      </div>
+    </div>
+    <div class="zone">
+      <h3>Цели / Сценарии</h3>
+      <div class="row">
+        <div class="box"><textarea placeholder="🎯 Цель 1"></textarea></div>
+        <div class="box"><textarea placeholder="🎯 Цель 2"></textarea></div>
+      </div>
+    </div>
   </div>  <div class="notes">
-    <h2>🔍 Вдохновлено Trails of Tucana — Новые механики:</h2>
-    <ul>
-      <li><strong>Асимметричный старт:</strong> каждый игрок начинает с уникальной раскладкой зон и бонусов.</li>
-      <li><strong>Парные условия раунда:</strong> 2 случайных карточки указывают типы зон или построек, которые приносят бонусы в раунде.</li>
-      <li><strong>Каскадные бонусы:</strong> при повторном выполнении схожего условия — запускается бонусная цепочка.</li>
-      <li><strong>Прозрачность вероятностей:</strong> игроки знают, какие зоны уже были и что ещё может выпасть (помогает планировать).</li>
-      <li><strong>Связь отзывов и зданий:</strong> например, три отзыва про еду дают бонус повару.</li>
-    </ul>
+    <h2>🔍 Примеры стартовых карт</h2>
+    <div class="card">
+      <h4>«Пляж мечты»</h4>
+      <p>3 пляжа, 1 пирс. Бонус: +1 радость. Нельзя строить кафе до 2 раунда.</p>
+    </div>
+    <div class="card">
+      <h4>«Лесная бухта»</h4>
+      <p>2 леса, 1 лагерь. Бонус: +1 монета. Репутация начинается с 0.</p>
+    </div><h2>🎴 Карточки условий раунда</h2>
+<div class="card">
+  <h4>Условие: Построй между пляжем и лесом</h4>
+  <p>Бонус: +1 радость</p>
+</div>
+<div class="card">
+  <h4>Условие: Кафе рядом с пирсом</h4>
+  <p>Бонус: +1 монета</p>
+</div>
+
+<h2>🔄 Каскадные бонусы</h2>
+<ul>
+  <li>2 душа на пляже → +1 радость</li>
+  <li>3 спорт-зоны → +2 монеты</li>
+  <li>2+ спасателя → +1 отзыв</li>
+</ul>
+
+<h2>📢 Связь отзывов и зданий</h2>
+<ul>
+  <li>3 отзыва с темой «еда» → Повар +1 уровень</li>
+  <li>Отзыв «туалеты грязные» + улучшение → +1 радость</li>
+</ul>
+
   </div>  <script>
     const grid = document.getElementById("island-grid");
     for (let i = 0; i < 121; i++) {
